@@ -1,3 +1,5 @@
+//вариант2
+
 using System;
 class ZooAnimal
 {   
