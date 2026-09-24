@@ -1,0 +1,73 @@
+using System;
+class Fruit
+{
+    public string name;
+    public string taste;
+
+    public string Name
+    {
+        get {return name;}
+        set {name = value;}
+    }
+
+    public string Taste
+    {
+        get {return taste;}
+        set {taste = value;}
+    }
+
+    public void Describe()
+    {
+        Console.WriteLine("Это фрукт");
+    }
+}
+class Apple:Fruit
+{
+    public void Crunch()
+    {
+        Console.WriteLine("Яблоко хрустит");
+    }
+
+    public void Describe()
+    {
+        Console.WriteLine("Это не фрукт");
+    }
+}
+class Orange: Fruit
+{
+    publci void Peel()
+    {
+        Console.WriteLine("Апельсин очищается");
+    }
+
+    public void Describe()
+    {
+        Console.WriteLine("Это тоже не фрукт");
+    }
+}
+class Banana: Fruit
+{
+    public void Peel()
+    {
+        Console.WriteLine("Банан очищается");
+    }
+
+    public void Describe()
+    {
+        Console.WriteLine("Это овощь");
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Fruit fruit1 = new Apple
+        fruit1.Describe();   
+        
+        Fruit fruit2 = new Orange
+        fruit2.Describe();
+
+        Fruit fruit3 = new Banana
+        fruit3.Describe();
+    }
+}
