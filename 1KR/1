@@ -1,0 +1,47 @@
+using System;
+using System.CodeDom.Compiler;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+
+public class Vehicle
+{
+    private int _speed;
+    private string _color;
+
+    public int Speed
+    {
+        get {return _speed;}
+        set
+        {
+            if (value < 0 )
+            {
+                throw new ArgumentException("Скорость не может быть отрицательной")
+            }
+            _speed = value
+        }
+    }
+    public string Color
+    {
+        get { return _color;}
+        set { return value;}
+    }
+
+}
+
+public class Car : Vehicle
+{
+    public string drive{get; set; }
+    
+    public Car(int Speed, string Color)
+
+}
+
+public class Bike : Vehicle
+{
+    private string _pedal;
+}
+
+public class Boat : Vehicle
+{
+    private string _sail;
+}
