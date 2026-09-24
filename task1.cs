@@ -1,3 +1,5 @@
+//3 вариант
+
 private abstract class Appliance()
 {
     private string _brand;
