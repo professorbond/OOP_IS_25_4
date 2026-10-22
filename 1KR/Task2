@@ -1,0 +1,152 @@
+using System;
+
+public interface IMoneyAmount
+{
+    decimal Value { get; set; }
+    void Display();
+}
+
+
+public abstract class MoneyAmountBase : IMoneyAmount
+{
+    public decimal Value { get; set; }
+
+    protected MoneyAmountBase(decimal value)
+    {
+        Value = value;
+    }
+
+
+    public virtual void Display()
+    {
+        Console.WriteLine($"Сумма: {Value}");
+    }
+}
+
+
+public class CashAmount : MoneyAmountBase
+{
+    public CashAmount(decimal value) : base(value) { }
+
+    public static CashAmount operator +(CashAmount a, CashAmount b)
+    {
+        if (a == null || b == null) return null;
+        return new CashAmount(a.Value + b.Value);
+    }
+}
+
+public class BankAmount : MoneyAmountBase
+{
+    public BankAmount(decimal value) : base(value) { }
+
+    public static BankAmount operator +(BankAmount a, BankAmount b)
+    {
+        if (a == null || b == null) return null;
+        return new BankAmount(a.Value + b.Value);
+    }
+}
+
+
+class Program
+{
+   
+    public static void ProcessAmount(IMoneyAmount amount)
+    {
+        Console.Write("Обработка: ");
+        amount.Display();
+    }
+
+    static void Main()
+    {
+       
+        CashAmount cash1 = new CashAmount(500m);
+        CashAmount cash2 = new CashAmount(1500m);
+        
+        BankAmount bank1 = new BankAmount(10000m);
+        BankAmount bank2 = new BankAmount(25000.50m);
+
+       
+        CashAmount totalCash = cash1 + cash2;
+        BankAmount totalBank = bank1 + bank2;
+
+        
+        Console.WriteLine("--- Вывод через общий интерфейс ---");
+        ProcessAmount(cash1);
+        ProcessAmount(totalCash);
+        ProcessAmount(totalBank);
+
+    }
+}
+
+//Задача 1
+
+// Товар
+public class Product
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+
+    public Product(string name, decimal price)
+    {
+        Name = name;
+        Price = price;
+    }
+}
+
+
+public class Category
+{
+    public string Name { get; set; }
+    public List<Product> Products { get; set; } = new List<Product>();
+
+    public Category(string name)
+    {
+        Name = name;
+    }
+
+    public void AddProduct(Product product)
+    {
+        Products.Add(product);
+    }
+
+    public void RemoveProduct(Product product)
+    {
+        Products.Remove(product);
+    }
+}
+
+// Магазин
+public class Store
+{
+    public string Name { get; set; }
+    public List<Category> Categories { get; set; } = new List<Category>();
+
+    public Store(string name)
+    {
+        Name = name;
+    }
+
+    public void AddCategory(Category category)
+    {
+        Categories.Add(category);
+    }
+}
+
+// Покупатель
+public class Customer
+{
+    public string Name { get; set; }
+    public List<Product> PurchasedItems { get; set; } = new List<Product>();
+
+    public Customer(string name)
+    {
+        Name = name;
+    }
+
+    
+    public void BuyProduct(Product product)
+    {
+        PurchasedItems.Add(product);
+        Console.WriteLine($"{Name} купил {product.Name} за {product.Price} руб.");
+    }
+}
