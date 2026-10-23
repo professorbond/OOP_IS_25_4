@@ -248,6 +248,11 @@ class AudioTrack : AudioBase
     {
         return a.Duration > b.Duration;
     }
+
+    public static bool operator <(Podcast a, Podcast b)
+    {
+        return a.Duration < b.Duration;
+    }
 }
 
 class Podcast : AudioBase
@@ -264,6 +269,11 @@ class Podcast : AudioBase
     public static bool operator >(Podcast a, Podcast b)
     {
         return a.Duration > b.Duration;
+    }
+    
+    public static bool operator < (Podcast a, Podcast b)
+    {
+        return a.Duration < b.Duration;
     }
 }
 
